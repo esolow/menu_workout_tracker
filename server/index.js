@@ -11,6 +11,11 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-producti
 app.use(cors());
 app.use(express.json());
 
+// Health check endpoint for DigitalOcean
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // Log all incoming requests
 app.use((req, res, next) => {
   console.log(`[REQUEST] ${req.method} ${req.path}`);
