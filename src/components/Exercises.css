@@ -1,0 +1,561 @@
+.exercises-container {
+  max-width: 100%;
+  padding-bottom: 20px;
+}
+
+.exercises-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.exercises-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.exercises-subtitle {
+  font-size: 14px;
+  color: #666;
+}
+
+.body-parts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.body-part-section {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.body-part-header {
+  width: 100%;
+  padding: 16px;
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+.body-part-header:active {
+  background-color: #f5f5f5;
+}
+
+.body-part-header.open {
+  background-color: #f0f7ff;
+  border-bottom-color: #4A90E2;
+}
+
+.body-part-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+  text-align: left;
+}
+
+.exercise-count {
+  font-size: 13px;
+  color: #666;
+  margin: 0 12px;
+}
+
+.dropdown-arrow {
+  font-size: 12px;
+  color: #4A90E2;
+  transition: transform 0.2s;
+}
+
+.exercises-list {
+  padding: 8px;
+  background-color: #fafafa;
+}
+
+.exercise-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border-left: 3px solid #4A90E2 !important;
+}
+
+.exercise-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exercise-item:last-child {
+  margin-bottom: 0;
+}
+
+.exercise-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exercise-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.exercise-name-hebrew {
+  font-size: 13px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.exercise-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #888;
+}
+
+.exercise-separator {
+  color: #ccc;
+}
+
+.exercise-sets,
+.exercise-reps {
+  font-weight: 500;
+}
+
+.video-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  min-height: 44px;
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  margin-left: 12px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.video-button:active {
+  background-color: #357ABD;
+}
+
+.delete-exercise-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-width: 44px;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.delete-exercise-button:hover {
+  background-color: #c82333;
+}
+
+.delete-exercise-button:active {
+  background-color: #bd2130;
+}
+
+.edit-exercise-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-width: 44px;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.edit-exercise-button:hover {
+  background-color: #218838;
+}
+
+.edit-exercise-button:active {
+  background-color: #1e7e34;
+}
+
+.overridden-exercise {
+  border-left: 3px solid #4A90E2;
+}
+
+.video-icon {
+  font-size: 12px;
+}
+
+.video-text {
+  font-size: 14px;
+}
+
+.custom-exercise {
+  border-left: 3px solid #4A90E2;
+}
+
+.custom-badge {
+  display: inline-block;
+  background: #4A90E2;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.shoulder-tag {
+  display: inline-block;
+  background: #ffe5b4;
+  color: #a35b00;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+/* Add Exercise Button */
+.add-exercise-button {
+  background: #4A90E2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.add-exercise-button:hover {
+  background: #357ABD;
+}
+
+.add-exercise-inline-button {
+  background: #f0f0f0;
+  color: #4A90E2;
+  border: 1px solid #4A90E2;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.add-exercise-inline-button:hover {
+  background: #e8f0fe;
+}
+
+.add-exercise-inline-button-group {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Exercise Modal */
+.exercise-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.exercise-modal {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  -webkit-overflow-scrolling: touch;
+}
+
+.exercise-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.exercise-modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.exercise-modal-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.exercise-modal-close:hover {
+  background: #f0f0f0;
+}
+
+.exercise-modal-content {
+  padding: 20px;
+}
+
+.body-part-selector p {
+  margin-bottom: 15px;
+  color: #666;
+  font-size: 14px;
+}
+
+.body-part-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.body-part-select-button {
+  background: white;
+  border: 2px solid #4A90E2;
+  color: #4A90E2;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.body-part-select-button:hover {
+  background: #4A90E2;
+  color: white;
+}
+
+.exercise-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.exercise-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.exercise-form-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+}
+
+.exercise-form-field input {
+  padding: 12px;
+  min-height: 44px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 16px; /* Minimum 16px to prevent iOS zoom */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.exercise-form-field input:focus {
+  outline: none;
+  border-color: #4A90E2;
+}
+
+.exercise-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.selected-body-part {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: #f0f7ff;
+  border: 1px solid #4A90E2;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #4A90E2;
+  font-weight: 500;
+}
+
+.change-body-part-button {
+  background: #4A90E2;
+  color: white;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.exercise-modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.exercise-modal-cancel,
+.exercise-modal-save {
+  padding: 14px 20px;
+  min-height: 44px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.exercise-modal-cancel {
+  background: #f0f0f0;
+  color: #333;
+  border: none;
+}
+
+.exercise-modal-cancel:hover {
+  background: #e0e0e0;
+}
+
+.exercise-modal-save {
+  background: #4A90E2;
+  color: white;
+  border: none;
+}
+
+.exercise-modal-save:hover:not(:disabled) {
+  background: #357ABD;
+}
+
+.exercise-modal-save:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .body-part-header {
+    padding: 14px;
+    min-height: 44px;
+  }
+  
+  .body-part-name {
+    font-size: 15px;
+  }
+  
+  .exercise-count {
+    font-size: 12px;
+    margin: 0 8px;
+  }
+  
+  .exercise-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .exercise-actions {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .video-button {
+    flex: 1;
+    justify-content: center;
+    margin-left: 0;
+    min-height: 44px;
+  }
+  
+  .delete-exercise-button,
+  .edit-exercise-button {
+    flex: 0 0 auto;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .exercise-name {
+    font-size: 14px;
+  }
+  
+  .exercise-name-hebrew {
+    font-size: 12px;
+  }
+  
+  .exercise-form-field input {
+    font-size: 16px; /* Prevent iOS zoom */
+    padding: 14px;
+  }
+  
+  .exercise-modal {
+    max-height: 90vh;
+  }
+}
+

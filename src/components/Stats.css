@@ -1,0 +1,376 @@
+.stats-container {
+  max-width: 100%;
+  padding-bottom: 20px;
+}
+
+.stats-header {
+  margin-bottom: 20px;
+}
+
+.stats-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.period-selector {
+  display: flex;
+  gap: 8px;
+  background-color: #f5f5f5;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.period-button {
+  flex: 1;
+  padding: 12px 14px;
+  min-height: 44px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.period-button.active {
+  background-color: #4A90E2;
+  color: white;
+}
+
+.period-button:active {
+  opacity: 0.8;
+}
+
+/* Summary Cards */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  position: relative;
+}
+
+.streak-card {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: white;
+}
+
+.streak-card .card-label,
+.streak-card .card-value {
+  color: white;
+}
+
+.card-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #4A90E2;
+  margin-bottom: 4px;
+}
+
+.card-subtext {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.card-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 24px;
+  opacity: 0.3;
+}
+
+/* Stats Sections */
+.stats-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  background-color: #f8f9fa;
+  padding: 14px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4A90E2;
+  margin-bottom: 4px;
+}
+
+.stat-goal {
+  font-size: 11px;
+  color: #999;
+}
+
+/* Charts */
+.chart-container {
+  margin-top: 20px;
+}
+
+.chart-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chart-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chart-bar-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.chart-bar-container {
+  width: 100%;
+  height: 32px;
+  background-color: #f0f0f0;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.chart-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4A90E2 0%, #357ABD 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  min-width: 40px;
+  transition: width 0.3s ease;
+}
+
+.chart-bar-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+}
+
+/* Workout Chart */
+.workout-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.workout-chart-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.workout-chart-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.workout-chart-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.workout-bar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.workout-bar-label {
+  font-size: 11px;
+  color: #666;
+  width: 50px;
+  text-align: left;
+}
+
+.workout-bar-container {
+  flex: 1;
+  height: 24px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.workout-bar {
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  min-width: 24px;
+  transition: width 0.3s ease;
+}
+
+.muscle-bar {
+  background: linear-gradient(90deg, #4A90E2 0%, #357ABD 100%);
+}
+
+.cardio-bar {
+  background: linear-gradient(90deg, #27ae60 0%, #229954 100%);
+}
+
+.week-completed-badge {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #27ae60;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Food List */
+.food-list-section {
+  margin-top: 20px;
+}
+
+.food-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.food-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.food-rank {
+  font-size: 14px;
+  font-weight: 700;
+  color: #4A90E2;
+  min-width: 30px;
+}
+
+.food-name {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.food-count {
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .summary-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .card-value {
+    font-size: 24px;
+  }
+  
+  .stat-value {
+    font-size: 20px;
+  }
+  
+  .period-button {
+    font-size: 13px;
+    padding: 12px 10px;
+    min-height: 44px;
+  }
+  
+  .stats-section {
+    padding: 16px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+  }
+}
+

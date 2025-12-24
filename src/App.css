@@ -1,0 +1,169 @@
+.App {
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+/* Login Screen Styles */
+.login-screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-header h1 {
+  color: #4A90E2;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.login-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-hint {
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+  margin: 0;
+  margin-top: 8px;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 30px 20px;
+    border-radius: 15px;
+  }
+  
+  .login-header h1 {
+    font-size: 24px;
+  }
+}
+
+.app-header {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: white;
+  padding: 20px 16px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.date-display {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.auth-bar-wrapper {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.auth-hint {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.tab-navigation {
+  display: flex;
+  background-color: #fff;
+  border-bottom: 2px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tab-button {
+  flex: 1;
+  min-width: 100px;
+  padding: 16px 12px;
+  min-height: 48px;
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.tab-button.active {
+  color: #4A90E2;
+  border-bottom-color: #4A90E2;
+}
+
+.tab-button:active {
+  background-color: #f5f5f5;
+}
+
+.app-content {
+  padding: 16px;
+  padding-bottom: 32px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .app-header h1 {
+    font-size: 20px;
+  }
+  
+  .tab-button {
+    font-size: 14px;
+    padding: 14px 10px;
+    min-width: 90px;
+    min-height: 48px;
+  }
+  
+  .app-content {
+    padding: 12px;
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+  
+  .login-container {
+    margin: 16px;
+    max-width: calc(100% - 32px);
+  }
+}
