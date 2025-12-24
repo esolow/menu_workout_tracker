@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Backend server for Menu & Workout Tracker",
   "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "start": "node index.js"
   },

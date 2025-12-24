@@ -251,14 +251,18 @@ if (usePostgres) {
   // Note: This runs asynchronously, so database might be restored after first connection
   // That's okay - first connection will create empty DB, then restore will overwrite it
   if (process.env.NODE_ENV === 'production' || process.env.SPACES_BUCKET) {
-    const { restoreDatabase } = require('./backup');
-    // Restore asynchronously (don't block startup)
-    // Use setImmediate to ensure it runs after module load
+    // Load backup module lazily to avoid build issues if @aws-sdk isn't needed
     setImmediate(() => {
-      restoreDatabase().catch(err => {
-        console.error('Failed to restore database on startup:', err);
-        // Continue with fresh database if restore fails
-      });
+      try {
+        const { restoreDatabase } = require('./backup');
+        restoreDatabase().catch(err => {
+          console.error('Failed to restore database on startup:', err);
+          // Continue with fresh database if restore fails
+        });
+      } catch (err) {
+        // If backup module fails to load (e.g., missing dependencies), continue without it
+        console.warn('Backup module not available:', err.message);
+      }
     });
   }
   

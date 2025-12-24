@@ -965,25 +965,33 @@ app.get('/test-workout-schedule-route', (req, res) => {
 
 // Setup periodic backup (every 6 hours) if Spaces is configured
 if (process.env.SPACES_BUCKET && !process.env.DATABASE_URL) {
-  const { backupDatabase } = require('./backup');
-  // Backup immediately on startup
-  setTimeout(() => {
-    backupDatabase().catch(err => console.error('Startup backup failed:', err));
-  }, 30000); // Wait 30 seconds for app to initialize
-  
-  // Then backup every 6 hours
-  setInterval(() => {
-    backupDatabase().catch(err => console.error('Periodic backup failed:', err));
-  }, 6 * 60 * 60 * 1000); // 6 hours
-  console.log('📦 Automatic database backup enabled (every 6 hours)');
+  try {
+    const { backupDatabase } = require('./backup');
+    // Backup immediately on startup
+    setTimeout(() => {
+      backupDatabase().catch(err => console.error('Startup backup failed:', err));
+    }, 30000); // Wait 30 seconds for app to initialize
+    
+    // Then backup every 6 hours
+    setInterval(() => {
+      backupDatabase().catch(err => console.error('Periodic backup failed:', err));
+    }, 6 * 60 * 60 * 1000); // 6 hours
+    console.log('📦 Automatic database backup enabled (every 6 hours)');
+  } catch (err) {
+    console.warn('Backup module not available (Spaces not configured):', err.message);
+  }
 }
 
 // Graceful shutdown: backup before exit
 process.on('SIGTERM', async () => {
   console.log('SIGTERM received, backing up database...');
   if (process.env.SPACES_BUCKET && !process.env.DATABASE_URL) {
-    const { backupDatabase } = require('./backup');
-    await backupDatabase();
+    try {
+      const { backupDatabase } = require('./backup');
+      await backupDatabase();
+    } catch (err) {
+      console.warn('Backup on shutdown failed:', err.message);
+    }
   }
   process.exit(0);
 });
@@ -991,8 +999,12 @@ process.on('SIGTERM', async () => {
 process.on('SIGINT', async () => {
   console.log('SIGINT received, backing up database...');
   if (process.env.SPACES_BUCKET && !process.env.DATABASE_URL) {
-    const { backupDatabase } = require('./backup');
-    await backupDatabase();
+    try {
+      const { backupDatabase } = require('./backup');
+      await backupDatabase();
+    } catch (err) {
+      console.warn('Backup on shutdown failed:', err.message);
+    }
   }
   process.exit(0);
 });

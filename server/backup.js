@@ -10,7 +10,24 @@
  *   - Auto: Automatically restores on startup if enabled
  */
 
-const { S3Client, PutObjectCommand, GetObjectCommand, HeadObjectCommand } = require('@aws-sdk/client-s3');
+// Lazy load AWS SDK to avoid build issues if not needed
+let S3Client, PutObjectCommand, GetObjectCommand, HeadObjectCommand;
+
+function loadAWSSDK() {
+  if (!S3Client) {
+    try {
+      const s3 = require('@aws-sdk/client-s3');
+      S3Client = s3.S3Client;
+      PutObjectCommand = s3.PutObjectCommand;
+      GetObjectCommand = s3.GetObjectCommand;
+      HeadObjectCommand = s3.HeadObjectCommand;
+    } catch (err) {
+      throw new Error('AWS SDK not available. Install @aws-sdk/client-s3 if using Spaces backup.');
+    }
+  }
+  return { S3Client, PutObjectCommand, GetObjectCommand, HeadObjectCommand };
+}
+
 const fs = require('fs');
 const path = require('path');
 
@@ -32,8 +49,11 @@ function initS3Client() {
     return null;
   }
 
-  if (!s3Client) {
-    s3Client = new S3Client({
+  try {
+    const { S3Client: S3 } = loadAWSSDK();
+    
+    if (!s3Client) {
+      s3Client = new S3({
       endpoint: `https://${SPACES_ENDPOINT}`,
       region: SPACES_REGION,
       credentials: {
@@ -41,10 +61,14 @@ function initS3Client() {
         secretAccessKey: SPACES_SECRET,
       },
       forcePathStyle: false, // DigitalOcean Spaces uses virtual-hosted-style
-    });
-  }
+      });
+    }
 
-  return s3Client;
+    return s3Client;
+  } catch (err) {
+    console.error('Failed to initialize S3 client:', err.message);
+    return null;
+  }
 }
 
 /**
@@ -68,7 +92,8 @@ async function backupDatabase() {
     
     console.log(`📤 Uploading database backup (${(fileStats.size / 1024).toFixed(2)} KB)...`);
 
-    const command = new PutObjectCommand({
+    const { PutObjectCommand: PutCmd } = loadAWSSDK();
+    const command = new PutCmd({
       Bucket: SPACES_BUCKET,
       Key: DB_BACKUP_KEY,
       Body: fileContent,
@@ -100,7 +125,8 @@ async function restoreDatabase() {
 
   try {
     // Check if backup exists
-    const headCommand = new HeadObjectCommand({
+    const { HeadObjectCommand: HeadCmd } = loadAWSSDK();
+    const headCommand = new HeadCmd({
       Bucket: SPACES_BUCKET,
       Key: DB_BACKUP_KEY,
     });
@@ -117,7 +143,8 @@ async function restoreDatabase() {
 
     console.log('📥 Downloading database backup from Spaces...');
 
-    const getCommand = new GetObjectCommand({
+    const { GetObjectCommand: GetCmd } = loadAWSSDK();
+    const getCommand = new GetCmd({
       Bucket: SPACES_BUCKET,
       Key: DB_BACKUP_KEY,
     });
@@ -151,7 +178,8 @@ async function backupExists() {
   if (!client) return false;
 
   try {
-    const headCommand = new HeadObjectCommand({
+    const { HeadObjectCommand: HeadCmd } = loadAWSSDK();
+    const headCommand = new HeadCmd({
       Bucket: SPACES_BUCKET,
       Key: DB_BACKUP_KEY,
     });
