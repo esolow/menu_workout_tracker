@@ -103,11 +103,32 @@ function convertInsertOrReplaceWithColumn(query, params, uniqueColumn) {
 if (usePostgres) {
   // PostgreSQL setup
   const { Pool } = require('pg');
+  
+  // Parse connection string and configure SSL
+  const connectionString = process.env.DATABASE_URL;
+  
+  // Supabase requires SSL but may have certificate chain issues
+  // Use rejectUnauthorized: false for Supabase connections
+  const sslConfig = connectionString && (
+    connectionString.includes('sslmode=require') || 
+    connectionString.includes('supabase.com')
+  )
+    ? { rejectUnauthorized: false } // Supabase uses valid certs but chain may not be complete
+    : false;
+  
   const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_URL.includes('sslmode=require') 
-      ? { rejectUnauthorized: false } 
-      : false
+    connectionString: connectionString,
+    ssl: sslConfig,
+    // Add connection timeout and retry settings
+    connectionTimeoutMillis: 10000, // 10 seconds
+    idleTimeoutMillis: 30000,
+    max: 10, // Maximum number of clients in the pool
+  });
+  
+  // Handle connection errors gracefully
+  pool.on('error', (err) => {
+    console.error('Unexpected PostgreSQL pool error:', err);
+    // Don't crash the app - errors will be handled per-request
   });
 
   // Create a SQLite-compatible interface for PostgreSQL
@@ -237,9 +258,14 @@ if (usePostgres) {
     }
   };
   
-  // Initialize database tables
-  db.serialize(() => {
-    initPostgresTables(pool);
+  // Initialize database tables asynchronously (don't block startup)
+  // If connection fails, app will still start and can retry later
+  setImmediate(() => {
+    initPostgresTables(pool).catch(err => {
+      console.error('Failed to initialize PostgreSQL tables on startup:', err.message);
+      console.warn('App will continue, but database operations may fail until connection is established');
+      // Don't crash the app - let it start and handle connection errors per-request
+    });
   });
   
 } else {
