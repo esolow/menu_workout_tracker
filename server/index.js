@@ -963,6 +963,40 @@ app.get('/test-workout-schedule-route', (req, res) => {
   res.json({ message: 'Test route works!', path: '/sync/workout-schedule exists' });
 });
 
+// Setup periodic backup (every 6 hours) if Spaces is configured
+if (process.env.SPACES_BUCKET && !process.env.DATABASE_URL) {
+  const { backupDatabase } = require('./backup');
+  // Backup immediately on startup
+  setTimeout(() => {
+    backupDatabase().catch(err => console.error('Startup backup failed:', err));
+  }, 30000); // Wait 30 seconds for app to initialize
+  
+  // Then backup every 6 hours
+  setInterval(() => {
+    backupDatabase().catch(err => console.error('Periodic backup failed:', err));
+  }, 6 * 60 * 60 * 1000); // 6 hours
+  console.log('📦 Automatic database backup enabled (every 6 hours)');
+}
+
+// Graceful shutdown: backup before exit
+process.on('SIGTERM', async () => {
+  console.log('SIGTERM received, backing up database...');
+  if (process.env.SPACES_BUCKET && !process.env.DATABASE_URL) {
+    const { backupDatabase } = require('./backup');
+    await backupDatabase();
+  }
+  process.exit(0);
+});
+
+process.on('SIGINT', async () => {
+  console.log('SIGINT received, backing up database...');
+  if (process.env.SPACES_BUCKET && !process.env.DATABASE_URL) {
+    const { backupDatabase } = require('./backup');
+    await backupDatabase();
+  }
+  process.exit(0);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log('Menu template routes registered:');

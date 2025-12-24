@@ -20,6 +20,33 @@ services:
     value: "CHANGE_THIS_TO_A_SECURE_RANDOM_STRING"
     scope: RUN_TIME
     type: SECRET
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    type: SECRET
+    # Set this value in DigitalOcean dashboard after creating managed database
+    # OR leave unset to use SQLite with Spaces backup (see SPACES_* variables below)
+  - key: SPACES_ACCESS_KEY_ID
+    scope: RUN_TIME
+    type: SECRET
+    # Get from DigitalOcean → API → Spaces Keys
+  - key: SPACES_SECRET_ACCESS_KEY
+    scope: RUN_TIME
+    type: SECRET
+    # Get from DigitalOcean → API → Spaces Keys
+  - key: SPACES_BUCKET
+    scope: RUN_TIME
+    type: GENERAL
+    # Your Spaces bucket name (e.g., "menu-tracker-backups")
+  - key: SPACES_ENDPOINT
+    scope: RUN_TIME
+    type: GENERAL
+    value: "nyc3.digitaloceanspaces.com"
+    # Change if your app is in a different region
+  - key: SPACES_REGION
+    scope: RUN_TIME
+    type: GENERAL
+    value: "nyc3"
+    # Change if your app is in a different region
   health_check:
     http_path: /health
     initial_delay_seconds: 10
