@@ -82,6 +82,49 @@ app.post('/auth/signup', async (req, res) => {
   }
 });
 
+// Temporary admin creation endpoint (remove after creating your admin account)
+// Usage: POST /auth/create-admin with { email, password }
+app.post('/auth/create-admin', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password required' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    db.run(
+      'INSERT INTO users (email, password_hash, role) VALUES (?, ?, ?)',
+      [email, hashedPassword, 'admin'],
+      function(err) {
+        if (err) {
+          if (err.message.includes('UNIQUE constraint')) {
+            // If user exists, update to admin
+            db.run(
+              'UPDATE users SET role = ?, password_hash = ? WHERE email = ?',
+              ['admin', hashedPassword, email],
+              function(updateErr) {
+                if (updateErr) {
+                  return res.status(500).json({ error: 'Failed to update user' });
+                }
+                const token = jwt.sign({ userId: this.lastID, email, role: 'admin' }, JWT_SECRET);
+                res.json({ token, user: { id: this.lastID, email, role: 'admin' }, message: 'User updated to admin' });
+              }
+            );
+            return;
+          }
+          return res.status(500).json({ error: 'Failed to create admin' });
+        }
+
+        const token = jwt.sign({ userId: this.lastID, email, role: 'admin' }, JWT_SECRET);
+        res.json({ token, user: { id: this.lastID, email, role: 'admin' }, message: 'Admin created successfully' });
+      }
+    );
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 app.post('/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
