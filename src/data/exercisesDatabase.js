@@ -27,15 +27,15 @@ export const EXERCISES_BY_BODY_PART = {
         name: 'לחיצות חזה במכונה',
         nameEn: 'Chest Presses on Machine',
         sets: 4,
-        reps: '12-15',
+        reps: '8-10',
         videoUrl: 'https://www.youtube.com/results?search_query=chest+press+machine'
       },
       {
         id: 4,
         name: 'מקבילים עם גרביטון',
         nameEn: 'Dips with Graviton (Assisted Dips)',
-        sets: 4,
-        reps: '12-15',
+        sets: 3,
+        reps: '6-8',
         videoUrl: 'https://www.youtube.com/results?search_query=assisted+dips+graviton'
       }
     ]
@@ -49,7 +49,7 @@ export const EXERCISES_BY_BODY_PART = {
         name: 'הרחקת כתפיים עם משקולות',
         nameEn: 'Shoulder Raises with Dumbbells (Lateral Raises)',
         sets: 4,
-        reps: '12-15',
+        reps: '15',
         videoUrl: 'https://www.youtube.com/results?search_query=lateral+raise+dumbbell'
       },
       {
@@ -57,7 +57,7 @@ export const EXERCISES_BY_BODY_PART = {
         name: 'הרחקת כתפיים יד יד מפולי תחתון (בלי מנוחה)',
         nameEn: 'Single-Arm Shoulder Raises from Low Pulley (Without Rest)',
         sets: 4,
-        reps: '12-15',
+        reps: '12',
         videoUrl: 'https://www.youtube.com/results?search_query=cable+lateral+raise'
       }
     ]
@@ -86,8 +86,8 @@ export const EXERCISES_BY_BODY_PART = {
         id: 3,
         name: 'פשיטת מרפק יד יד בכבל מפולי עליון (בלי מנוחה)',
         nameEn: 'Single-Arm Elbow Extension with Cable from High Pulley (Without Rest)',
-        sets: 4,
-        reps: '8-10',
+        sets: 3,
+        reps: '15',
         videoUrl: 'https://www.youtube.com/results?search_query=single+arm+tricep+pushdown'
       },
       {

@@ -3,17 +3,15 @@ import { useAuth } from '../context/AuthContext';
 import './AuthBar.css';
 
 function AuthBar() {
-  const { isAuthenticated, user, login, signup, logout, loading, syncStatus } = useAuth();
+  const { isAuthenticated, user, login, logout, loading, syncStatus } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [mode, setMode] = useState('login'); // login | signup
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    const action = mode === 'login' ? login : signup;
-    const res = await action(email.trim(), password);
+    const res = await login(email.trim(), password);
     if (!res.success) {
       setError(res.error || 'Failed');
     } else {
@@ -83,14 +81,7 @@ function AuthBar() {
         required
       />
       <button type="submit" disabled={loading}>
-        {loading ? '...' : mode === 'login' ? 'Login' : 'Sign Up'}
-      </button>
-      <button
-        type="button"
-        className="auth-toggle"
-        onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
-      >
-        {mode === 'login' ? 'Create account' : 'Have an account? Login'}
+        {loading ? '...' : 'Login'}
       </button>
       {error && <div className="auth-error">{error}</div>}
     </form>
